@@ -5,13 +5,21 @@ import '../utils/app_routes.dart';
 class MealItem extends StatelessWidget {
   final Meal meal;
 
-  const MealItem(this.meal);
+  const MealItem(this.meal, {super.key});
 
   void _selectMeal(BuildContext context) {
-    Navigator.of(context).pushNamed(
+    Navigator.of(context)
+        .pushNamed(
       AppRoutes.MEAL_DETAIL,
       arguments: meal,
-    );
+    )
+        .then((result) {
+      if (result == null) {
+        print('sem resultado');
+      } else {
+        print('O nome da refeição é $result;');
+      }
+    });
   }
 
   @override
@@ -46,13 +54,13 @@ class MealItem extends StatelessWidget {
                   child: Container(
                     width: 300,
                     color: Colors.black54,
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                       vertical: 5,
                       horizontal: 20,
                     ),
                     child: Text(
                       meal.title,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 26,
                         color: Colors.white,
                       ),
@@ -64,14 +72,14 @@ class MealItem extends StatelessWidget {
               ],
             ),
             Padding(
-              padding: EdgeInsets.all(20),
+              padding: const EdgeInsets.all(20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      Icon(Icons.schedule),
-                      SizedBox(
+                      const Icon(Icons.schedule),
+                      const SizedBox(
                         width: 6,
                       ),
                       Text('${meal.duration} min'),
@@ -79,8 +87,8 @@ class MealItem extends StatelessWidget {
                   ),
                   Row(
                     children: <Widget>[
-                      Icon(Icons.work),
-                      SizedBox(
+                      const Icon(Icons.work),
+                      const SizedBox(
                         width: 6,
                       ),
                       Text(meal.complexityText),
@@ -88,8 +96,8 @@ class MealItem extends StatelessWidget {
                   ),
                   Row(
                     children: <Widget>[
-                      Icon(Icons.attach_money),
-                      SizedBox(
+                      const Icon(Icons.attach_money),
+                      const SizedBox(
                         width: 6,
                       ),
                       Text(meal.costText),
